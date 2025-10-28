@@ -4,10 +4,12 @@
         "type": "Fire",
         "national_no": "0004",
         "name": "Charmander",
-        "species": "Lizard Pokémon",
+        "species": "Lizard Pok\u00e9mon",
         "height_m": 0.6,
         "weight_kg": 8.5,
-        "abilities": ["Blaze"],
+        "abilities": [
+            "Blaze"
+        ],
         "stats": {
             "hp": 100,
             "attack": 122,
@@ -23,10 +25,13 @@
         "type": "Fire",
         "national_no": "0037",
         "name": "Vulpix",
-        "species": "Fox Pokémon",
+        "species": "Fox Pok\u00e9mon",
         "height_m": 0.6,
         "weight_kg": 9.9,
-        "abilities": ["Flash Fire", "Drought"],
+        "abilities": [
+            "Flash Fire",
+            "Drought"
+        ],
         "stats": {
             "hp": 130,
             "attack": 150,
@@ -42,10 +47,12 @@
         "type": "Grass",
         "national_no": "0001",
         "name": "Bulbasaur",
-        "species": "Seed Pokémon",
+        "species": "Seed Pok\u00e9mon",
         "height_m": 0.7,
         "weight_kg": 6.9,
-        "abilities": ["Overgrow"],
+        "abilities": [
+            "Overgrow"
+        ],
         "stats": {
             "hp": 120,
             "attack": 118,
@@ -61,10 +68,13 @@
         "type": "Grass",
         "national_no": "0043",
         "name": "Oddish",
-        "species": "Weed Pokémon",
+        "species": "Weed Pok\u00e9mon",
         "height_m": 0.5,
         "weight_kg": 5.4,
-        "abilities": ["Chlorophyll", "Run Away"],
+        "abilities": [
+            "Chlorophyll",
+            "Run Away"
+        ],
         "stats": {
             "hp": 95,
             "attack": 80,

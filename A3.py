@@ -214,6 +214,7 @@ class GrassType(BasePokemon, ABC):
     def display(self):
         """Return Grass-type description (used in type report)."""
         return "[Type: Grass]\n" + GrassType.TYPE_INFO
+    
 
     @classmethod
     def calculate_average(cls, pokemons):
@@ -278,34 +279,78 @@ class FireType(BasePokemon, ABC):
 class Oddish(GrassType):
     def display(self):
         s = self.get_stats()
-        return f"No. {self.get_national_no()} - {self.get_name()} ({self.get_species()})\n" \
-               f"Stats: HP {s.get_stat('hp')}, Atk {s.get_stat('attack')}, Def {s.get_stat('defense')}," \
-               f" SpA {s.get_stat('sp_atk')}, SpD {s.get_stat('sp_def')}, Spe {s.get_stat('speed')}," \
-               f" Total {s.get_total()}"
+        return f"\nNational Number: {self.get_national_no()}\n" \
+               f"Name: {self.get_name()}\n" \
+               f"Type: {self.TYPE_NAME}\n" \
+               f"Species: {self.get_species()}\n" \
+               f"Height: {self.get_height()} m\n" \
+               f"Weight: {self.get_weight()} kg\n" \
+               f"Abilities: {';'.join(self.get_abilities())}\n" \
+               f"Stats:\n" \
+               f"  HP: {s.get_stat('hp')}\n" \
+               f"  Attack: {s.get_stat('attack')}\n" \
+               f"  Defense: {s.get_stat('defense')}\n" \
+               f"  Special Attack: {s.get_stat('sp_atk')}\n" \
+               f"  Special Defense: {s.get_stat('sp_def')}\n" \
+               f"  Speed: {s.get_stat('speed')}\n" \
+               f"  Total: {s.get_total()}"
 
 class Bulbasaur(GrassType):
     def display(self):
         s = self.get_stats()
-        return f"No. {self.get_national_no()} - {self.get_name()} ({self.get_species()})\n" \
-               f"Stats: HP {s.get_stat('hp')}, Atk {s.get_stat('attack')}, Def {s.get_stat('defense')}," \
-               f" SpA {s.get_stat('sp_atk')}, SpD {s.get_stat('sp_def')}, Spe {s.get_stat('speed')}," \
-               f" Total {s.get_total()}"
+        return f"\nNational Number: {self.get_national_no()}\n" \
+               f"Name: {self.get_name()}\n" \
+               f"Type: {self.TYPE_NAME}\n" \
+               f"Species: {self.get_species()}\n" \
+               f"Height: {self.get_height()} m\n" \
+               f"Weight: {self.get_weight()} kg\n" \
+               f"Abilities: {';'.join(self.get_abilities())}\n" \
+               f"Stats:\n" \
+               f"  HP: {s.get_stat('hp')}\n" \
+               f"  Attack: {s.get_stat('attack')}\n" \
+               f"  Defense: {s.get_stat('defense')}\n" \
+               f"  Special Attack: {s.get_stat('sp_atk')}\n" \
+               f"  Special Defense: {s.get_stat('sp_def')}\n" \
+               f"  Speed: {s.get_stat('speed')}\n" \
+               f"  Total: {s.get_total()}"
 
 class Charmander(FireType):
     def display(self):
         s = self.get_stats()
-        return f"No. {self.get_national_no()} - {self.get_name()} ({self.get_species()})\n" \
-               f"Stats: HP {s.get_stat('hp')}, Atk {s.get_stat('attack')}, Def {s.get_stat('defense')}," \
-               f" SpA {s.get_stat('sp_atk')}, SpD {s.get_stat('sp_def')}, Spe {s.get_stat('speed')}," \
-               f" Total {s.get_total()}"
+        return f"\nNational Number: {self.get_national_no()}\n" \
+               f"Name: {self.get_name()}\n" \
+               f"Type: {self.TYPE_NAME}\n" \
+               f"Species: {self.get_species()}\n" \
+               f"Height: {self.get_height()} m\n" \
+               f"Weight: {self.get_weight()} kg\n" \
+               f"Abilities: {';'.join(self.get_abilities())}\n" \
+               f"Stats:\n" \
+               f"  HP: {s.get_stat('hp')}\n" \
+               f"  Attack: {s.get_stat('attack')}\n" \
+               f"  Defense: {s.get_stat('defense')}\n" \
+               f"  Special Attack: {s.get_stat('sp_atk')}\n" \
+               f"  Special Defense: {s.get_stat('sp_def')}\n" \
+               f"  Speed: {s.get_stat('speed')}\n" \
+               f"  Total: {s.get_total()}"
 
 class Vulpix(FireType):
     def display(self):
         s = self.get_stats()
-        return f"No. {self.get_national_no()} - {self.get_name()} ({self.get_species()})\n" \
-               f"Stats: HP {s.get_stat('hp')}, Atk {s.get_stat('attack')}, Def {s.get_stat('defense')}," \
-               f" SpA {s.get_stat('sp_atk')}, SpD {s.get_stat('sp_def')}, Spe {s.get_stat('speed')}," \
-               f" Total {s.get_total()}"
+        return f"\nNational Number: {self.get_national_no()}\n" \
+               f"Name: {self.get_name()}\n" \
+               f"Type: {self.TYPE_NAME}\n" \
+               f"Species: {self.get_species()}\n" \
+               f"Height: {self.get_height()} m\n" \
+               f"Weight: {self.get_weight()} kg\n" \
+               f"Abilities: {';'.join(self.get_abilities())}\n" \
+               f"Stats:\n" \
+               f"  HP: {s.get_stat('hp')}\n" \
+               f"  Attack: {s.get_stat('attack')}\n" \
+               f"  Defense: {s.get_stat('defense')}\n" \
+               f"  Special Attack: {s.get_stat('sp_atk')}\n" \
+               f"  Special Defense: {s.get_stat('sp_def')}\n" \
+               f"  Speed: {s.get_stat('speed')}\n" \
+               f"  Total: {s.get_total()}"
     
 # -----------------------
 # Generic Pokémon types
@@ -315,7 +360,7 @@ class GenericFirePokemon(FireType):
     """Generic Fire-type Pokémon created by the user."""
     def display(self):
         s = self.get_stats()
-        return (f"No. {self.get_national_no()} - {self.get_name()} ({self.get_species()}) [Fire]\n"
+        return (f"\nNo. {self.get_national_no()} - {self.get_name()} ({self.get_species()}) [Fire]\n"
                 f"Stats: HP {s.get_stat('hp')}, Atk {s.get_stat('attack')}, Def {s.get_stat('defense')}, "
                 f"SpA {s.get_stat('sp_atk')}, SpD {s.get_stat('sp_def')}, Spe {s.get_stat('speed')}, "
                 f"Total {s.get_total()}")
@@ -324,7 +369,7 @@ class GenericGrassPokemon(GrassType):
     """Generic Grass-type Pokémon created by the user."""
     def display(self):
         s = self.get_stats()
-        return (f"No. {self.get_national_no()} - {self.get_name()} ({self.get_species()}) [Grass]\n"
+        return (f"\nNo. {self.get_national_no()} - {self.get_name()} ({self.get_species()}) [Grass]\n"
                 f"Stats: HP {s.get_stat('hp')}, Atk {s.get_stat('attack')}, Def {s.get_stat('defense')}, "
                 f"SpA {s.get_stat('sp_atk')}, SpD {s.get_stat('sp_def')}, Spe {s.get_stat('speed')}, "
                 f"Total {s.get_total()}")
@@ -776,10 +821,8 @@ def detect_and_load(dex, path):
     """Load based on file extension (.txt or .json)."""
     if path.lower().endswith(".json"):
         dex.load_json(path)
-        print(f"Loaded {len(dex.get_entries())} Pokémon from JSON.")
     elif path.lower().endswith(".txt"):
         dex.load(path)
-        print(f"Loaded {len(dex.get_entries())} Pokémon from text file.")
     else:
         raise ValueError("Unsupported file type. Use .txt or .json.")
 
