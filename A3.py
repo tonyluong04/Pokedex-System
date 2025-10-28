@@ -888,6 +888,7 @@ def main():
             if dex.count() == 0:
                 print("Pokédex is empty.")
             else:
+                print(f"\n--- Listing {dex.count()} Pokémon ---")
                 for p in dex.get_entries():
                     print(p.display())
                     print("-" * 40)
