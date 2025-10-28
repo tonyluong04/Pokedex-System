@@ -1,0 +1,60 @@
+Name: Charmander
+National Number: 0004
+Species: Lizard Pokémon
+Height: 0.6 m
+Weight: 8.5 kg
+Abilities: Blaze
+Stats:
+  Total: 686
+  HP: 100
+  Attack: 122
+  Defence: 121
+  Special Attack: 111
+  Special Defense: 121
+  Speed: 111
+
+Name: Vulpix
+National Number: 0037
+Species: Fox Pokémon
+Height: 0.6 m
+Weight: 9.9 kg
+Abilities: Flash Fire
+Stats:
+  Total: 10
+  HP: 1
+  Attack: 1
+  Defence: 2
+  Special Attack: 2
+  Special Defense: 3
+  Speed: 1
+
+Name: Bulbasaur
+National Number: 0001
+Species: Seed Pokémon
+Height: 0.7 m
+Weight: 6.9 kg
+Abilities: Overgrow
+Stats:
+  Total: 62
+  HP: 11
+  Attack: 9
+  Defence: 10
+  Special Attack: 13
+  Special Defense: 12
+  Speed: 7
+
+Name: Oddish
+National Number: 0043
+Species: Weed Pokémon
+Height: 0.5 m
+Weight: 5.4 kg
+Abilities: Chlorophyll
+Stats:
+  Total: 52
+  HP: 8
+  Attack: 7
+  Defence: 9
+  Special Attack: 12
+  Special Defense: 10
+  Speed: 6
+

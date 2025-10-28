@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.1">
+  <zoom_level>5</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>765</x>
+      <y>325</y>
+      <w>140</w>
+      <h>105</h>
+    </coordinates>
+    <panel_attributes>Stats
+--
+- hp:int
+- attack:int
+- defense:int
+- sp_atk:int
+- sp_def:int
+- speed:int
+--
++ set_stat(field:String, value:int):void
++ get_stat(field:String):int
++ get_total():int
++ as_dict(): dict
++ from_dict(d: dict): Stats &lt;&lt;static&gt;&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>420</x>
+      <y>300</y>
+      <w>205</w>
+      <h>155</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Abstract&gt;&gt;
+Base Pokemon
+--
+- national_no: String
+- name: String
+- species: String
+- height_m: float
+- weight_kg: float
+- abilities: List&lt;String&gt;
+- stats: Stats
+--
++ get_national_no(): String 
++ get_name(): String
++ get_stats(): Stats 
++ set_basic_info(name: String, species: String, height_m: float,
+                          weight_kg: float, abilities: List&lt;String&gt;): void
++ display(): String «abstract» 
++ to_row(): dict
++ to_dict(): dict
++ from_dict(d: dict): BasePokemon &lt;&lt;static&gt;&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>300</y>
+      <w>290</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>Pokedex
+--
+- entries:List&lt;Pokemon&gt;
+- filepath: String
+- jsonpath: String
+- dirty: bool
+- instance: Pokedex &lt;&lt;static&gt;&gt;
+--
++ instance(): Pokedex &lt;&lt;static&gt;&gt;
++ add(p:Pokemon): void
++ find_by_name(name:String): Pokemon
++ find_by_national_no(no: String): Pokemon
++ remove_by_name(name:String): bool
++ remove_by_national_no(no: String): bool
++ update_by_name(name:String, field:String, value:int): bool
++ update_by_national_no(no:String, field:String, value:int): bool
++ get_entries():List&lt;Pokemon&gt;
++ load(filepath: String): void 
++ save(filepath: String = ""): void 
++ load_json(path: String): bool
++ save_json(path: String): void
+- create_pokemon_from_block(block: dict, stats: dict): void
++ export_type_report(typeName: String, outDir: String = "."): String</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>620</x>
+      <y>365</y>
+      <w>155</w>
+      <h>15</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;290.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>285</x>
+      <y>400</y>
+      <w>145</w>
+      <h>15</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;270.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>625</x>
+      <y>520</y>
+      <w>140</w>
+      <h>95</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Abstract&gt;&gt;
+Fire Type Pokemon
+--
++ TYPE_NAME: String = "Fire"
++ TYPE_INFO: String
+--
++ display(): String
++ calculate_average(pokemons: list): dict</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>320</x>
+      <y>515</y>
+      <w>135</w>
+      <h>95</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Abstract&gt;&gt;
+Grass Type Pokemon
+--
++ TYPE_NAME: String = "Grass"
++ TYPE_INFO: String
+--
++ display(): String
++ calculate_average(pokemons: list): dict</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>550</x>
+      <y>685</y>
+      <w>110</w>
+      <h>95</h>
+    </coordinates>
+    <panel_attributes>Charmander
+--
++display(): String</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>705</x>
+      <y>685</y>
+      <w>110</w>
+      <h>95</h>
+    </coordinates>
+    <panel_attributes>Vulpix
+--
++display(): String</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>240</x>
+      <y>685</y>
+      <w>110</w>
+      <h>95</h>
+    </coordinates>
+    <panel_attributes>Oddish
+--
++display(): String</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>385</x>
+      <y>685</y>
+      <w>110</w>
+      <h>95</h>
+    </coordinates>
+    <panel_attributes>Bulbasaur
+--
++display(): String</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>295</x>
+      <y>605</y>
+      <w>65</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>110.0;10.0;10.0;160.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>390</x>
+      <y>605</y>
+      <w>60</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;100.0;160.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>610</x>
+      <y>610</y>
+      <w>65</w>
+      <h>85</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>110.0;10.0;10.0;150.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>685</x>
+      <y>610</y>
+      <w>80</w>
+      <h>85</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;140.0;150.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>545</x>
+      <y>450</y>
+      <w>140</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;260.0;140.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>375</x>
+      <y>450</y>
+      <w>140</w>
+      <h>75</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>260.0;10.0;10.0;130.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>480</x>
+      <y>170</y>
+      <w>105</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>Exception
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>525</x>
+      <y>85</y>
+      <w>15</w>
+      <h>95</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;170.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>480</x>
+      <y>35</y>
+      <w>105</w>
+      <h>55</h>
+    </coordinates>
+    <panel_attributes>PokemonNotFoundError
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>525</x>
+      <y>215</y>
+      <w>15</w>
+      <h>95</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;170.0</additional_attributes>
+  </element>
+  <element>
+    <id>Text</id>
+    <coordinates>
+      <x>315</x>
+      <y>390</y>
+      <w>50</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>1
+style=wordwrap</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Text</id>
+    <coordinates>
+      <x>395</x>
+      <y>390</y>
+      <w>50</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>0..n
+style=wordwrap</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Text</id>
+    <coordinates>
+      <x>630</x>
+      <y>350</y>
+      <w>50</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>1
+style=wordwrap</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Text</id>
+    <coordinates>
+      <x>755</x>
+      <y>350</y>
+      <w>50</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>1
+style=wordwrap</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Text</id>
+    <coordinates>
+      <x>535</x>
+      <y>285</y>
+      <w>50</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>1
+style=wordwrap</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Text</id>
+    <coordinates>
+      <x>540</x>
+      <y>220</y>
+      <w>50</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>0..n
+style=wordwrap</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>80</x>
+      <y>155</y>
+      <w>135</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>Validator
+--
++RX_NUM: Pattern &lt;&lt;static&gt;&gt;
++RX_H: Pattern &lt;&lt;static&gt;&gt;
++RX_W: Pattern &lt;&lt;static&gt;&gt;
+--
++validate_number(s: String): bool &lt;&lt;static&gt;&gt;
++validate_height(s: String): bool &lt;&lt;static&gt;&gt;
++validate_weight(s: String): bool &lt;&lt;static&gt;&gt;
+--
+Notes:
+num: "No. " + exactly 4 digits
+height: d.d m
+weight: d.d kg</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>5</x>
+      <y>525</y>
+      <w>280</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>Visualizer
+--
++plot_pokemon_bar(p: Pokemon, outDir: String = "figs"): String &lt;&lt;static&gt;&gt;
++plot_pokemon_pie(p: Pokemon, outDir: String = "figs"): String &lt;&lt;static&gt;&gt;
++plot_type_avg_line(entries: List&lt;Pokemon&gt;, outDir: String = "figs"): String &lt;&lt;static&gt;&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
