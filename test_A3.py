@@ -50,8 +50,8 @@ class TestSerialization(unittest.TestCase):
     
     def test_json_save_load(self):
         """Test saving to and loading from JSON file."""
-        self.dex.add_pokemon(self.bulbasaur)
-        self.dex.add_pokemon(self.charmander)
+        self.dex.add(self.bulbasaur)
+        self.dex.add(self.charmander)
 
         with tempfile.NamedTemporaryFile(delete=False, suffix=".json") as tmpfile:
             json_path = tmpfile.name

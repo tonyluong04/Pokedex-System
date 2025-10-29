@@ -352,10 +352,6 @@ class Vulpix(FireType):
                f"  Special Defense: {s.get_stat('sp_def')}\n" \
                f"  Speed: {s.get_stat('speed')}\n" \
                f"  Total: {s.get_total()}"
-    
-# -----------------------
-# Generic Pokémon types
-# -----------------------
 
 class GenericFirePokemon(FireType):
     """Generic Fire-type Pokémon created by the user."""
@@ -422,12 +418,11 @@ class Pokedex:
         """Private constructor — only one instance allowed."""
         if Pokedex.__instance is not None:
             raise Exception("Pokedex is a Singleton class! Use get_instance().")
-        else:
-            self.entries = []
-            self.text_path = ""   # separate file for text data
-            self.json_path = ""   # separate file for JSON data
-            self.dirty = False
-            Pokedex.__instance = self
+        self.entries = []
+        self.text_path = ""
+        self.json_path = ""
+        self.dirty = False
+        Pokedex.__instance = self
 
     @classmethod
     def get_instance(cls):
