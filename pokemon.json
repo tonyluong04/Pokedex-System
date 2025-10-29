@@ -4,7 +4,7 @@
         "type": "Fire",
         "national_no": "0004",
         "name": "Charmander",
-        "species": "Lizard Pok\u00e9mon",
+        "species": "Lizard Pokemon",
         "height_m": 0.6,
         "weight_kg": 8.5,
         "abilities": [
@@ -25,7 +25,7 @@
         "type": "Fire",
         "national_no": "0037",
         "name": "Vulpix",
-        "species": "Fox Pok\u00e9mon",
+        "species": "Fox Pokemon",
         "height_m": 0.6,
         "weight_kg": 9.9,
         "abilities": [
@@ -47,7 +47,7 @@
         "type": "Grass",
         "national_no": "0001",
         "name": "Bulbasaur",
-        "species": "Seed Pok\u00e9mon",
+        "species": "Seed Pokemon",
         "height_m": 0.7,
         "weight_kg": 6.9,
         "abilities": [
@@ -68,7 +68,7 @@
         "type": "Grass",
         "national_no": "0043",
         "name": "Oddish",
-        "species": "Weed Pok\u00e9mon",
+        "species": "Weed Pokemon",
         "height_m": 0.5,
         "weight_kg": 5.4,
         "abilities": [

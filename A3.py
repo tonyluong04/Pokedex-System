@@ -111,9 +111,10 @@ class BasePokemon(ABC):
     def get_stats(self): return self.__stats
 
     # Basic info setter
-    def set_basic_info(self, name, species, height_m, weight_kg, abilities):
+    def set_basic_info(self, name, national_no, species, height_m, weight_kg, abilities):
         """Set the basic Pokémon information fields."""
         self.__name = name
+        self.__national_no = str(national_no)
         self.__species = species
         self.__height_m = float(height_m)
         self.__weight_kg = float(weight_kg)
@@ -360,19 +361,41 @@ class GenericFirePokemon(FireType):
     """Generic Fire-type Pokémon created by the user."""
     def display(self):
         s = self.get_stats()
-        return (f"\nNo. {self.get_national_no()} - {self.get_name()} ({self.get_species()}) [Fire]\n"
-                f"Stats: HP {s.get_stat('hp')}, Atk {s.get_stat('attack')}, Def {s.get_stat('defense')}, "
-                f"SpA {s.get_stat('sp_atk')}, SpD {s.get_stat('sp_def')}, Spe {s.get_stat('speed')}, "
-                f"Total {s.get_total()}")
+        return f"\nNational Number: {self.get_national_no()}\n" \
+               f"Name: {self.get_name()}\n" \
+               f"Type: {self.TYPE_NAME}\n" \
+               f"Species: {self.get_species()}\n" \
+               f"Height: {self.get_height()} m\n" \
+               f"Weight: {self.get_weight()} kg\n" \
+               f"Abilities: {';'.join(self.get_abilities())}\n" \
+               f"Stats:\n" \
+               f"  HP: {s.get_stat('hp')}\n" \
+               f"  Attack: {s.get_stat('attack')}\n" \
+               f"  Defense: {s.get_stat('defense')}\n" \
+               f"  Special Attack: {s.get_stat('sp_atk')}\n" \
+               f"  Special Defense: {s.get_stat('sp_def')}\n" \
+               f"  Speed: {s.get_stat('speed')}\n" \
+               f"  Total: {s.get_total()}"
 
 class GenericGrassPokemon(GrassType):
     """Generic Grass-type Pokémon created by the user."""
     def display(self):
         s = self.get_stats()
-        return (f"\nNo. {self.get_national_no()} - {self.get_name()} ({self.get_species()}) [Grass]\n"
-                f"Stats: HP {s.get_stat('hp')}, Atk {s.get_stat('attack')}, Def {s.get_stat('defense')}, "
-                f"SpA {s.get_stat('sp_atk')}, SpD {s.get_stat('sp_def')}, Spe {s.get_stat('speed')}, "
-                f"Total {s.get_total()}")
+        return f"\nNational Number: {self.get_national_no()}\n" \
+               f"Name: {self.get_name()}\n" \
+               f"Type: {self.TYPE_NAME}\n" \
+               f"Species: {self.get_species()}\n" \
+               f"Height: {self.get_height()} m\n" \
+               f"Weight: {self.get_weight()} kg\n" \
+               f"Abilities: {';'.join(self.get_abilities())}\n" \
+               f"Stats:\n" \
+               f"  HP: {s.get_stat('hp')}\n" \
+               f"  Attack: {s.get_stat('attack')}\n" \
+               f"  Defense: {s.get_stat('defense')}\n" \
+               f"  Special Attack: {s.get_stat('sp_atk')}\n" \
+               f"  Special Defense: {s.get_stat('sp_def')}\n" \
+               f"  Speed: {s.get_stat('speed')}\n" \
+               f"  Total: {s.get_total()}"
 
 
 
@@ -792,6 +815,7 @@ class Visualizer:
 
 
 
+
 # ---------------------------
 # Menu helpers functions
 # ---------------------------
@@ -869,6 +893,7 @@ def main():
         print("5) Add new Pokémon")
         print("6) Export type report (Fire/Grass)")
         print("7) Visualize stats")
+        print("8) Update basic info (No./Height/Weight)")
         print("S) Save")
         print("X) Exit")
 
@@ -897,7 +922,7 @@ def main():
         elif choice == "2":
             print("Search by:")
             print("  1) Name")
-            print("  2) National number (digits only, e.g., 0004)")
+            print("  2) National number (format: No. 0004)")
             print("  3) Type")
             sub = input("Choose option: ").strip()
             try:
@@ -906,7 +931,12 @@ def main():
                     p = dex.find_by_name(name)
                     print(p.display())
                 elif sub == "2":
-                    no = input("National number (digits only, e.g., 0004): ").strip()
+                    raw_no = input("National Number (format: No. 0004): ").strip()
+                    try:
+                        no = Validator.parse_national_no(raw_no)
+                    except ValueError as e:
+                        print(e)
+                        continue
                     p = dex.find_by_national_no(no)
                     print(p.display())
                 elif sub == "3":
@@ -939,7 +969,12 @@ def main():
                 else:
                     print("Update failed.")
             elif sub == "2":
-                no = input("National number (digits only, e.g., 0004): ").strip()
+                raw_no = input("National Number (format: No. 0004): ").strip()
+                try:
+                    no = Validator.parse_national_no(raw_no)
+                except ValueError as e:
+                    print(e)
+                    continue
                 field = input("Field (hp/attack/defense/sp_atk/sp_def/speed): ").strip()
                 value = input("New value (int): ").strip()
                 if dex.update_by_national_no(no, field, value):
@@ -962,7 +997,12 @@ def main():
                 else:
                     print("Not found.")
             elif sub == "2":
-                no = input("National number (digits only, e.g., 0004): ").strip()
+                raw_no = input("National Number (format: No. 0004): ").strip()
+                try:
+                    no = Validator.parse_national_no(raw_no)
+                except ValueError as e:
+                    print(e)
+                    continue
                 if dex.remove_by_national_no(no):
                     save_back(dex)
                     print("Removed and saved.")
@@ -1073,6 +1113,64 @@ def main():
                 print(e)
             except Exception as e:
                 print("Visualization failed:", e)
+
+         # Option 8: Update basic info (national no, height, weight)
+        elif choice == "8":
+            print("Update by: 1) Name  2) National number")
+            sub = input("Choose option: ").strip()
+            try:
+                if sub == "1":
+                    key = input("Name: ").strip()
+                    p = dex.find_by_name(key)
+                elif sub == "2":
+                    raw_key = input("National Number (format: No. 0004): ").strip()
+                    try:
+                        key = Validator.parse_national_no(raw_key)
+                    except ValueError as e:
+                        print(e)
+                        continue
+                    p = dex.find_by_national_no(key)
+                else:
+                    print("Invalid option.")
+                    continue
+
+                print(f"\nCurrent info for {p.get_name()}:")
+                print(f"  National Number: {p.get_national_no()}")
+                print(f"  Height: {p.get_height()} m")
+                print(f"  Weight: {p.get_weight()} kg")
+
+                field = input("Field (national_no / height_m / weight_kg): ").strip().lower()
+                value = input("New value: ").strip()
+
+                cur_name = p.get_name()
+                cur_species = p.get_species()
+                cur_abilities = p.get_abilities()
+                cur_no = p.get_national_no()
+                cur_h = p.get_height()
+                cur_w = p.get_weight()
+
+                new_no, new_h, new_w = cur_no, cur_h, cur_w
+
+                if field == "national_no":
+                    new_no = Validator.parse_national_no(value)
+                elif field == "height_m":
+                    new_h = Validator.parse_height_m(value)
+                elif field == "weight_kg":
+                    new_w = Validator.parse_weight_kg(value)
+                else:
+                    print("Invalid field.")
+                    continue
+
+                p.set_basic_info(cur_name, new_no, cur_species, new_h, new_w, cur_abilities)
+                dex.dirty = True
+                save_back(dex)
+                print("Updated and saved.")
+
+            except PokemonNotFoundError as e:
+                print(e)
+            except ValueError as e:
+                print(e)
+
 
         # Option S: Save
         elif choice == "s":
