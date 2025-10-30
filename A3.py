@@ -692,44 +692,44 @@ class Validator:
 
     # check methods
     @staticmethod
-    def valid_national_no(value: str) -> bool:
+    def valid_national_no(value: str):
         """Must exactly match 'No. XXXX' (with one space and 4 digits)."""
         return bool(Validator._re_no.fullmatch(value or ""))
 
     @staticmethod
-    def valid_height(value: str) -> bool:
+    def valid_height(value: str):
         """Must include ' m' unit with one space."""
         return bool(Validator._re_height.fullmatch(value or ""))
 
     @staticmethod
-    def valid_weight(value: str) -> bool:
+    def valid_weight(value: str):
         """Must include ' kg' unit with one space."""
         return bool(Validator._re_weight.fullmatch(value or ""))
 
     @staticmethod
-    def valid_name(value: str) -> bool:
+    def valid_name(value: str):
         return bool(Validator._re_name.fullmatch(value or ""))
 
     @staticmethod
-    def valid_abilities(value: str) -> bool:
+    def valid_abilities(value: str):
         return bool(Validator._re_abilities.fullmatch(value or ""))
 
     # parse methods
     @staticmethod
-    def parse_national_no(value: str) -> str:
+    def parse_national_no(value: str):
         """Accepts only 'No. XXXX' and returns 'XXXX' (digits only)."""
         if not Validator.valid_national_no(value):
             raise ValueError("National Number must be in format 'No. XXXX' (e.g., 'No. 0034').")
         return value[4:]  # removes 'No. '
 
     @staticmethod
-    def parse_height_m(value: str) -> float:
+    def parse_height_m(value: str):
         if not Validator.valid_height(value):
             raise ValueError("Height must include a space and unit, e.g., '1.70 m'.")
         return float(value.split()[0])
 
     @staticmethod
-    def parse_weight_kg(value: str) -> float:
+    def parse_weight_kg(value: str):
         if not Validator.valid_weight(value):
             raise ValueError("Weight must include a space and unit, e.g., '6.90 kg'.")
         return float(value.split()[0])
