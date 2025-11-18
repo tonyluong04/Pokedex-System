@@ -1,5 +1,6 @@
 # A3.py
 # CSIT121 Assignment 3
+# ===== CORE LOGIC (KEEP) =====
 from abc import ABC, abstractmethod
 import os
 import json
@@ -510,8 +511,7 @@ class Pokedex:
         self.text_path = filepath
         if not os.path.exists(filepath):
             self.dirty = False
-            print(f"File '{filepath}' not found. Starting with empty Pokédex.")
-            return
+            raise FileNotFoundError(f"File '{filepath}' not found.")
 
         with open(filepath, "r", encoding="utf-8") as f:
             block, stats = {}, {}
@@ -535,7 +535,7 @@ class Pokedex:
             if block:
                 self._create_pokemon_from_block(block, stats)
         self.dirty = False
-        print(f"Loaded {len(self.entries)} Pokémon from '{filepath}'")
+        return len(self.entries)
 
     def save(self, filepath=""):
         if filepath:
@@ -563,7 +563,7 @@ class Pokedex:
                 f.write("  Speed: {}\n".format(row["speed"]))
                 f.write("\n")
         self.dirty = False
-        print(f"Pokédex saved to '{self.text_path}'")
+        return self.text_path
 
     # Helper to create Pokémon from text block
     def _create_pokemon_from_block(self, block, stats):
@@ -618,8 +618,7 @@ class Pokedex:
     def load_json(self, filepath="pokemon.json"):
         """Load Pokémon data from a JSON file into the Pokédex."""
         if not os.path.exists(filepath):
-            print(f"JSON file '{filepath}' not found.")
-            return False
+            raise FileNotFoundError(f"JSON file '{filepath}' not found.")
 
         self.json_path = filepath
         with open(filepath, "r", encoding="utf-8") as f:
@@ -627,7 +626,7 @@ class Pokedex:
 
         self.entries = [BasePokemon.from_dict(d) for d in data]
         self.dirty = False
-        print(f"Loaded {len(self.entries)} Pokémon from JSON '{self.json_path}'")
+        return len(self.entries)
         return True
     
     def save_json(self, filepath="pokemon.json"):
@@ -636,7 +635,7 @@ class Pokedex:
         data = [p.to_dict() for p in self.entries]
         with open(self.json_path, "w", encoding="utf-8") as f:
             json.dump(data, f, indent=4)
-        print(f"Pokédex data saved to JSON file '{self.json_path}'")
+        return self.json_path
         return self.json_path    
     
     # Type report export
@@ -673,7 +672,6 @@ class Pokedex:
                         f"SpD {avgs['sp_def']}, Spe {avgs['speed']}\n\n")
             for p in selected:
                 f.write(p.display() + "\n\n")
-        print(f"Type report exported to {path}")
         return path
     
 
@@ -751,20 +749,24 @@ class Visualizer:
     @staticmethod
     def bar_stats_single(pokemon, save_path=None):
         if pokemon is None:
-            print("No Pokémon provided.")
-            return
+            raise ValueError("pokemon is required for bar chart visualization.")
         s = pokemon.get_stats()
         values = np.array([s.get_stat(k) for k in Visualizer.STAT_ORDER])
 
         plt.figure()
         plt.bar(Visualizer.STAT_LABELS, values)
-        plt.title(f"{pokemon.get_name()} — Attribute Bar Chart")
+        plt.title(f"{pokemon.get_name()} - Attribute Bar Chart")
         plt.xlabel("Attributes")
         plt.ylabel("Value")
         plt.grid(axis="y", linestyle="--", linewidth=0.5)
         plt.tight_layout()
-        if save_path: plt.savefig(save_path, dpi=150); print(f"Saved {save_path}"); plt.close()
-        else: plt.show()
+        if save_path:
+            plt.savefig(save_path, dpi=150)
+            plt.close()
+            return save_path
+        plt.show()
+        return None
+
 
     # Line chart: Fire vs Grass averages across the same ordered attributes
     @staticmethod
@@ -772,8 +774,7 @@ class Visualizer:
         fire_avg = FireType.calculate_average(pokemons) or {}
         grass_avg = GrassType.calculate_average(pokemons) or {}
         if not fire_avg and not grass_avg:
-            print("No data to plot.")
-            return
+            raise ValueError("No data to plot for type averages.")
 
         x = np.arange(len(Visualizer.STAT_ORDER))
         fire_vals = np.array([fire_avg.get(k, 0) for k in Visualizer.STAT_ORDER])
@@ -783,34 +784,41 @@ class Visualizer:
         plt.plot(x, fire_vals, marker="o", label="Fire")
         plt.plot(x, grass_vals, marker="o", label="Grass")
         plt.xticks(x, Visualizer.STAT_LABELS)
-        plt.title("Type Averages — Fire vs Grass (Line Chart)")
+        plt.title("Type Averages - Fire vs Grass (Line Chart)")
         plt.xlabel("Attributes")
         plt.ylabel("Average Value")
         plt.grid(True, linestyle="--", linewidth=0.5)
         plt.legend()
         plt.tight_layout()
-        if save_path: plt.savefig(save_path, dpi=150); print(f"Saved {save_path}"); plt.close()
-        else: plt.show()
+        if save_path:
+            plt.savefig(save_path, dpi=150)
+            plt.close()
+            return save_path
+        plt.show()
+        return None
+
 
     # Pie chart: one Pokémon’s distribution
     @staticmethod
     def pie_stats(pokemon, save_path=None):
         if pokemon is None:
-            print("No Pokémon provided.")
-            return
+            raise ValueError("pokemon is required for pie chart visualization.")
         s = pokemon.get_stats()
         values = np.array([s.get_stat(k) for k in Visualizer.STAT_ORDER])
 
         plt.figure()
         plt.pie(values, labels=Visualizer.STAT_LABELS, autopct="%1.1f%%", startangle=90)
-        plt.title(f"{pokemon.get_name()} — Stat Distribution")
+        plt.title(f"{pokemon.get_name()} - Stat Distribution")
         plt.axis("equal")
-        if save_path: plt.savefig(save_path, dpi=150); print(f"Saved {save_path}"); plt.close()
-        else: plt.show()
+        if save_path:
+            plt.savefig(save_path, dpi=150)
+            plt.close()
+            return save_path
+        plt.show()
+        return None
 
 
-
-
+# ===== CONSOLE UI (WILL REPLACE WITH WEB) =====
 # ---------------------------
 # Menu helpers functions
 # ---------------------------
@@ -837,21 +845,24 @@ def prompt_int(msg):
         except: print("Invalid integer. Try again (or X to cancel).")
 
 def detect_and_load(dex, path):
-    """Load based on file extension (.txt or .json)."""
-    if path.lower().endswith(".json"):
-        dex.load_json(path)
-    elif path.lower().endswith(".txt"):
-        dex.load(path)
-    else:
-        raise ValueError("Unsupported file type. Use .txt or .json.")
+    """Load based on file extension (.txt or .json) and return record count."""
+    normalized = path.strip()
+    lower = normalized.lower()
+    if lower.endswith(".json"):
+        return dex.load_json(normalized)
+    if lower.endswith(".txt"):
+        return dex.load(normalized)
+    raise ValueError("Unsupported file type. Use .txt or .json.")
 
 def save_back(dex):
     """Save back to the same file type that was loaded."""
     try:
         if dex.json_path:
-            dex.save_json(dex.json_path)
+            saved_path = dex.save_json(dex.json_path)
+            print(f"Pok\u00e9dex data saved to JSON file '{saved_path}'")
         elif dex.text_path:
-            dex.save(dex.text_path)
+            saved_path = dex.save(dex.text_path)
+            print(f"Pok\u00e9dex saved to '{saved_path}'")
         else:
             print("No file loaded — please use 'S' to specify save file.")
             return
@@ -872,7 +883,8 @@ def main():
     path = input("Enter file path (.txt or .json) or press Enter to skip: ").strip()
     if path:
         try:
-            detect_and_load(dex, path)
+            loaded = detect_and_load(dex, path)
+            print(f"Loaded {loaded} Pokémon from '{path}'.")
         except Exception as e:
             print("Load failed:", e)
     else:
